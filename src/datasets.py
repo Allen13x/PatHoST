@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 from sklearn.neighbors import NearestNeighbors
-from .spatial import numpy_to_torch_sparse
+from .utils import numpy_to_torch_sparse
 import scanpy as sc
 
 

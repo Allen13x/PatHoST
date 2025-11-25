@@ -71,6 +71,27 @@ def sparse_mx_to_torch_sparse_tensor(sparse_mx):
 	return torch.sparse.FloatTensor(indices, values, shape)
 
 
+def numpy_to_torch_sparse(adj_numpy):
+	"""
+	Converts a NumPy adjacency matrix into a PyTorch sparse tensor.
+
+	This function identifies the non-zero elements in the input NumPy array to create
+	the indices and values required for a PyTorch sparse FloatTensor. It assumes an
+	unweighted adjacency matrix where the existence of an edge implies a value of 1.
+
+	Args:
+		adj_numpy (numpy.ndarray): The input adjacency matrix as a dense NumPy array.
+
+	Returns:
+		torch.sparse.FloatTensor: A sparse PyTorch tensor representation of the adjacency matrix,
+		where indices correspond to non-zero elements in the input and values are all ones.
+	"""
+	row, col = np.nonzero(adj_numpy)
+	indices = torch.tensor(np.vstack((row, col)), dtype=torch.long)
+	values = torch.ones(len(row))
+	shape = torch.Size(adj_numpy.shape)
+	return torch.sparse.FloatTensor(indices, values, shape)
+
 class EarlyStopping:
 	"""Early stopping ottimizzato con warmup e patience dinamica"""
 	def __init__(self, patience=5, min_delta=1e-6, warmup_epochs=10):
