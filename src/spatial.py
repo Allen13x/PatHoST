@@ -476,7 +476,7 @@ def Smooth(spdata,key,data,X,overlap=None,mode='Mean',Dist=200, D=None):
 	if mode == 'Local':
 
 		if D is None:
-			GetLocalPCADistance(spdata,key,X,Dist)
+			D=GetLocalPCADistance(spdata,key,X,Dist)
 
 		dummy=spdata[key][data].copy()
 		D=D[overlap,:][:,overlap]
@@ -487,7 +487,7 @@ def Smooth(spdata,key,data,X,overlap=None,mode='Mean',Dist=200, D=None):
 	
 	if mode == 'Global':
 		if D is None:
-			GetGlobalPCADistance(spdata,key,X,overlap,Dist)
+			D=GetGlobalPCADistance(spdata,key,X,overlap,Dist)
 		
 		dummy=spdata[key][data].copy()
 		D=D[overlap,:][:,overlap]
