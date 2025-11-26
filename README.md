@@ -8,9 +8,9 @@ PatHoST is a Python framework for spatial transcriptomics data analysis, designe
 
 PatHoST provides tools for:
 
-- **Bacterial Classification**: Machine learning and deep learning models for classifying pathogen presence/absence in spatial data
-- **Spatial Smoothing**: Algorithms for data smoothing based on spatial proximity and PCA similarity
 - **Ground Truth Projection**: Alignment and projection of ground truth data onto training datasets
+- **Spatial Smoothing**: Algorithms for data smoothing based on spatial proximity and PCA similarity
+- **Bacterial Classification**: Machine learning and deep learning models for classifying pathogen presence/absence in spatial data
 - **Performance Evaluation**: Clustering metrics and model stability assessment
 
 ## 🏗️ Model Architecture
