@@ -2,7 +2,7 @@
 
 **Pat**hogen-**Ho**st **S**patial **T**ranscriptomics
 
-PatHoST is a Python library for spatial transcriptomics data analysis, designed to study pathogen-host interactions using machine learning and deep learning techniques.
+PatHoST is a Python framework for spatial transcriptomics data analysis, designed to study pathogen-host interactions using machine learning and deep learning techniques.
 
 ## 📋 Description
 
@@ -10,7 +10,7 @@ PatHoST provides tools for:
 
 - **Bacterial Classification**: Machine learning and deep learning models for classifying pathogen presence/absence in spatial data
 - **Spatial Smoothing**: Algorithms for data smoothing based on spatial proximity and PCA similarity
-- **Ground Truth Projection**: Alignment and projection of ground truth data onto reference datasets
+- **Ground Truth Projection**: Alignment and projection of ground truth data onto training datasets
 - **Performance Evaluation**: Clustering metrics and model stability assessment
 
 ## 🏗️ Model Architecture
@@ -22,7 +22,6 @@ The library includes various neural network architectures:
 | `Encoder` / `Encoder_dropout` | Feed-forward encoder for latent space compression |
 | `Decoder` / `Decoder_dropout` | Decoder for data reconstruction |
 | `Autoencoder` / `Autoencoder_dropout` | Standard autoencoder with/without dropout |
-| `VAutoencoder_dropout` | Variational Autoencoder with reparameterization |
 | `Autoencoder_Bacterial_Predictor` | Autoencoder with classification head for bacterial prediction |
 | `Encoder_Bacterial_Predictor_dropout` | Encoder with integrated predictor |
 
@@ -82,6 +81,33 @@ pip install numpy pandas scipy matplotlib
 
 ## 📖 Usage
 
+
+### Spatial Smoothing
+
+```python
+from src.spatial import Smooth
+
+# Apply Mean-based smoothing
+smoothed_data, distance_matrix = Smooth(
+    spdata=spatial_data,
+    key='sample',
+    data='dataY',
+    X='dataX',
+    mode='Mean',
+    Dist=200
+)
+
+# Or apply Local PCA-based smoothing
+smoothed_data, D = Smooth(
+    spdata=spatial_data,
+    key='sample',
+    data='dataY',
+    X='dataX',
+    mode='Local',
+    Dist=200
+)
+```
+
 ### Training the Bacterial Classifier
 
 ```python
@@ -130,32 +156,6 @@ predictions = BacterialClassifierPrediction(
 )
 ```
 
-### Spatial Smoothing
-
-```python
-from src.spatial import Smooth
-
-# Apply Mean-based smoothing
-smoothed_data, distance_matrix = Smooth(
-    spdata=spatial_data,
-    key='sample',
-    data='dataY',
-    X='dataX',
-    mode='Mean',
-    Dist=200
-)
-
-# Or apply Local PCA-based smoothing
-smoothed_data, D = Smooth(
-    spdata=spatial_data,
-    key='sample',
-    data='dataY',
-    X='dataX',
-    mode='Local',
-    Dist=200
-)
-```
-
 ### Evaluation with Clustering Metrics
 
 ```python
@@ -181,7 +181,6 @@ print(results_df)
 
 ### Deep Learning
 - **Autoencoder with Dropout**: Latent representation learning with regularization
-- **Variational Autoencoder**: Latent distribution generation with reparameterization
 - **Encoder with Predictor**: Direct classification from latent space
 
 ## 🔧 Main Dependencies
@@ -203,16 +202,6 @@ The `notebooks/` folder contains interactive tutorials:
 1. **Data_prep.ipynb**: Spatial data preparation and preprocessing
 2. **Training.ipynb**: Model training for classification
 3. **Evaluation.ipynb**: Performance evaluation and results visualization
-
-## 🤝 Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create a branch for your feature (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push the branch (`git push origin feature/new-feature`)
-5. Open a Pull Request
 
 ## 📄 License
 
