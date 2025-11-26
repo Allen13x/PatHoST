@@ -2,7 +2,7 @@
 
 **Pat**hogen-**Ho**st **S**patial **T**ranscriptomics
 
-PatHoST is a Python framework for spatial transcriptomics data analysis, designed to study pathogen-host interactions using machine learning and deep learning techniques.
+PatHoST is a Python framework for spatial transcriptomics data analysis, designed to study pathogen-host interactions using machine learning and deep learning techniques by imputing the presence of bacteria on the tissues
 
 ## 📋 Description
 
