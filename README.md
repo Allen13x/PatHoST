@@ -49,7 +49,7 @@ PatHoST/
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.13+
 - CUDA (optional, for GPU acceleration)
 
 ### Setup with Conda
