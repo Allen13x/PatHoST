@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PatHoST"
+version = "0.1.0"
+authors = [
+  { name="Federico Di Marco", email="federico.dimarco91@gmail.com" },
+]
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+	"joblib==1.4.2",
+	"matplotlib==3.10.8",
+	"numpy==2.4.0",
+	"pandas==2.3.3",
+	"scanpy==1.11.5",
+	"scikit_fuzzy==0.5.0",
+	"scikit_learn==1.8.0",
+	"scipy==1.16.3",
+	"torch==2.6.0",
+	"xgboost==3.1.2",
+]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
