@@ -26,6 +26,7 @@ dependencies = [
 	"scipy==1.16.3",
 	"torch==2.6.0",
 	"xgboost==3.1.2",
+	"numba=0.61.0"
 ]
 
 
