@@ -60,7 +60,7 @@ conda create --name pathost python=3.13
 conda activate pathost
 
 # Install dependencies
-pip install torch torchvision scanpy anndata scikit-learn xgboost
+pip install git+[https://github.com/Allen13x/PatHoST.git](https://github.com/Allen13x/PatHoST.git)
 ```
 
 ### Setup with pip
@@ -73,10 +73,7 @@ source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 
 # Install main dependencies
-pip install torch torchvision
-pip install scanpy anndata
-pip install scikit-learn xgboost
-pip install numpy pandas scipy matplotlib
+pip install git+[https://github.com/Allen13x/PatHoST.git](https://github.com/Allen13x/PatHoST.git)
 ```
 
 ## 📖 Usage
@@ -85,7 +82,7 @@ pip install numpy pandas scipy matplotlib
 ### Spatial Smoothing
 
 ```python
-from src.spatial import Smooth
+from PatHoST.spatial import Smooth
 
 # Apply Mean-based smoothing
 smoothed_data, distance_matrix = Smooth(
@@ -111,7 +108,7 @@ smoothed_data, D = Smooth(
 ### Training the Bacterial Classifier
 
 ```python
-from src.train import BacterialClassifierWorkflow
+from PatHoST.train import BacterialClassifierWorkflow
 
 # Define parameters
 train_keys = ['sample_1', 'sample_2']
@@ -138,8 +135,8 @@ results = BacterialClassifierWorkflow(
 ### Prediction
 
 ```python
-from src.predict import BacterialClassifierPrediction
-from src.models import Autoencoder_Bacterial_Predictor_dropout
+from PatHoST.predict import BacterialClassifierPrediction
+from PatHoST.models import Autoencoder_Bacterial_Predictor_dropout
 
 # Load model
 n_genes = spatial_data['sample']['dataX'].shape[1]  # Number of genes/features in expression matrix
@@ -159,7 +156,7 @@ predictions = BacterialClassifierPrediction(
 ### Evaluation with Clustering Metrics
 
 ```python
-from src.metrics import evaluate_all_methods
+from PatHoST.metrics import evaluate_all_methods
 
 # Evaluate all clustering methods
 results_df, labels_df = evaluate_all_methods(
