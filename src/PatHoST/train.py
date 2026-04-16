@@ -163,11 +163,11 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					# Define the input size
 					n_input = X_trainS.shape[1]
 
-					X_train_sub,X_val,Y_train,Y_val=train_test_split(X_train, Y_train, test_size=0.2, random_state=42)
+					X_train_sub,X_val_sub,Y_train_sub,Y_val_sub=train_test_split(X_train, Y_train, test_size=0.2, random_state=42)
 
 					# Define the dataset
-					train_dataset = CustomDataset(X_train_sub, Y_train)
-					val_dataset = CustomDataset(X_val, Y_val)
+					train_dataset = CustomDataset(X_train_sub, Y_train_sub)
+					val_dataset = CustomDataset(X_val_sub, Y_val_sub)
 					test_dataset = CustomDataset(X_test, Y_test)
 
 					train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -410,11 +410,11 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					# Define the input size
 					n_input = X_trainS.shape[1]
 
-					X_train_sub,X_val,Y_train,Y_val=train_test_split(X_train, Y_train, test_size=0.2, random_state=42)
+					X_train_sub,X_val_sub,Y_train_sub,Y_val_sub=train_test_split(X_train, Y_train, test_size=0.2, random_state=42)
 
 					# Define the dataset
-					train_dataset = CustomDataset(X_train_sub, Y_train)
-					val_dataset = CustomDataset(X_val, Y_val)
+					train_dataset = CustomDataset(X_train_sub, Y_train_sub)
+					val_dataset = CustomDataset(X_val_sub, Y_val_sub)
 					test_dataset = CustomDataset(X_test, Y_test)
 
 					train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
