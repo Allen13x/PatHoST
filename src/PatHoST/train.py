@@ -116,6 +116,7 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 				K_testS=np.array(K_test)
 
 				if 'Logistic' in models:
+					print(f"Training Logistic Regression for {suff} and {y} at cutoff {cc}")
 					# Create an instance of LogisticRegression
 					logreg = LogisticRegression()
 
@@ -131,6 +132,7 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					OUTPUT[suff][y][cc]['Logistic'] = {'model': logreg,'auc': auc}
 				
 				if 'RandomForest' in models:
+					print(f"Training Random Forest for {suff} and {y} at cutoff {cc}")
 					# Create an instance of RandomForestClassifier
 					rf = RandomForestClassifier()
 
@@ -146,6 +148,7 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					OUTPUT[suff][y][cc]['RandomForest'] = {'model' : rf,'auc': auc}
 
 				if 'XGBoost' in models:
+					print(f"Training XGBoost for {suff} and {y} at cutoff {cc}")
 					# Create an instance of XGBClassifier
 					xgb_model = XGBClassifier(use_label_encoder=False, eval_metric='logloss')
 
@@ -160,6 +163,7 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					OUTPUT[suff][y][cc]['XGBoost'] = {'model': xgb_model,'auc': auc}
 
 				if 'Autoencoder_dropout' in models:
+					print(f"Training Autoencoder with dropout for {suff} and {y} at cutoff {cc}")
 					# Define the input size
 					n_input = X_trainS.shape[1]
 
@@ -177,13 +181,13 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					# Define the model
 
 					if suff in AED:
-						# Crea un nuovo modello e copia solo i pesi di ae dal modello già addestrato
 						model = Autoencoder_Bacterial_Predictor_dropout(n_input, embed_size, h_dim=128,dropout=dropout)
 						model = model.to(device)
 						#model.ae.load_state_dict(AED[suff].ae.state_dict())
 						model.ae.load_state_dict(AED[suff])
 						print(f"Using pre-trained Autoencoder weights for {suff}, predictor reinitialized")
 					else:
+						print(f"No pre-trained Autoencoder weights found for {suff}, training from scratch")
 						model = Autoencoder_Bacterial_Predictor_dropout(n_input, embed_size, h_dim=128,dropout=dropout)
 						model=model.to(device)
 						# Define the loss function
@@ -407,6 +411,7 @@ def BacterialClassifierWorkflow(spdata_i,train_keys,Xdata,Ydata,spots,signal_cut
 					print(torch.cuda.memory_reserved() / 1024**2, "MB reserved")
 
 				if 'Encoder_dropout' in models:
+					print(f"Training Autoencoder with dropout for {suff} and {y} at cutoff {cc}")
 					# Define the input size
 					n_input = X_trainS.shape[1]
 
