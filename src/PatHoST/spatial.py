@@ -322,16 +322,17 @@ def GetLocalPCADistance(spdata,key,X,Dist=200):
 	for w in range(index.shape[0]):
 		i=index[w][dist[w]<Dist]
 		l=len(i)
-		t=spdata[key][X][:,spdata[key]['xcol']][i].copy()
-		sc.pp.pca(t)
+		if l>1:
+			t=spdata[key][X][:,spdata[key]['xcol']][i].copy()
+			sc.pp.pca(t)
 
-		d=[0]*(l)
-		for z in range(1,(l)):
-			a=math.exp(2-distance.cosine(t.obsm['X_pca'][0],t.obsm['X_pca'][z]))
-			d[z]=a
-		d=[a/sum(d) for a in d]
-		for q in range(0,l):
-			D[i[0],i[q]]=d[q]
+			d=[0]*(l)
+			for z in range(1,(l)):
+				a=math.exp(2-distance.cosine(t.obsm['X_pca'][0],t.obsm['X_pca'][z]))
+				d[z]=a
+			d=[a/sum(d) for a in d]
+			for q in range(0,l):
+				D[i[0],i[q]]=d[q]
 	
 	return D
 
@@ -382,15 +383,16 @@ def GetGlobalPCADistance(spdata,key,X,Dist=200):
 	for w in range(index.shape[0]):
 		i=index[w][dist[w]<Dist]
 		l=len(i)
-		t=dummy[i]
+		if l>1:
+			t=dummy[i]
 
-		d=[0]*(l)
-		for z in range(1,(l)):
-			a=math.exp(2-distance.cosine(t.obsm['X_pca'][0],t.obsm['X_pca'][z]))
-			d[z]=a
-		d=[a/sum(d) for a in d]
-		for q in range(0,l):
-			D[i[0],i[q]]=d[q]
+			d=[0]*(l)
+			for z in range(1,(l)):
+				a=math.exp(2-distance.cosine(t.obsm['X_pca'][0],t.obsm['X_pca'][z]))
+				d[z]=a
+			d=[a/sum(d) for a in d]
+			for q in range(0,l):
+				D[i[0],i[q]]=d[q]
 	return D
 
 
@@ -491,7 +493,7 @@ def Smooth(spdata,key,data,X,overlap=None,mode='Mean',Dist=200, D=None):
 	
 	if mode == 'Global':
 		if D is None:
-			D=GetGlobslPCADistance(spdata,key,X,Dist)
+			D=GetGlobalPCADistance(spdata,key,X,Dist)
 		elif D not in spdata[key]:
 			D=GetGlobalPCADistance(spdata,key,X,Dist)
 		else:
